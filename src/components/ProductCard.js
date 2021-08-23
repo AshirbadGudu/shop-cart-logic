@@ -15,8 +15,15 @@ const ProductCard = ({ product }) => {
     <>
       <Grid item lg={3}>
         <Card>
+          <CardMedia
+            image={`/${product.image}`}
+            title={product.title}
+            style={{
+              height: 150,
+              backgroundSize: "contain",
+            }}
+          />
           <CardHeader title={product.title} />
-          <CardMedia src={product.image} title={product.title} />
           <CardContent>
             <Typography>{product.description}</Typography>
             <Typography>{product.prince}</Typography>
