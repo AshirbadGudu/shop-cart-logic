@@ -1,3 +1,4 @@
 import ProductCard from "./ProductCard";
 import CartCard from "./CartCard";
-export { ProductCard, CartCard };
+import Navbar from "./Navbar";
+export { ProductCard, CartCard, Navbar };
