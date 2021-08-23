@@ -1,40 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useProducts = () => {
-  const [products] = useState([
-    {
-      _id: "dress1",
-      title: "Dress 1",
-      image: "images/dress1.jpeg",
-      description: "About this dress",
-      prince: 300,
-      availableSizes: ["S", "M", "L", "XL"],
-    },
-    {
-      _id: "dress2",
-      title: "Dress 2",
-      image: "images/dress2.jpeg",
-      description: "About this dress",
-      prince: 250,
-      availableSizes: ["S", "M", "L", "XL"],
-    },
-    {
-      _id: "dress3",
-      title: "Dress 3",
-      image: "images/dress3.jpeg",
-      description: "About this dress",
-      prince: 350,
-      availableSizes: ["S", "M", "L", "XL"],
-    },
-    {
-      _id: "dress4",
-      title: "Dress 4",
-      image: "images/dress4.jpeg",
-      description: "About this dress",
-      prince: 600,
-      availableSizes: ["S", "M", "L", "XL"],
-    },
-  ]);
+  const [products, setProducts] = useState([]);
+  const fetchProducts = async () => {
+    try {
+      const result = await fetch("https://fakestoreapi.com/products");
+      const data = await result.json();
+      setProducts(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchProducts();
+    return () => {};
+  }, []);
 
   return {
     products,

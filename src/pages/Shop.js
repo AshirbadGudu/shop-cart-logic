@@ -1,6 +1,6 @@
 import { useProducts } from "../hooks";
 import { ProductCard } from "../components";
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Breadcrumbs, Container, Grid, Typography } from "@material-ui/core";
 const Shop = () => {
   const { products } = useProducts();
   return (
@@ -9,7 +9,10 @@ const Shop = () => {
         marginTop: "2vh",
       }}
     >
-      <Typography variant="h5">Products</Typography>
+      <Breadcrumbs>
+        <Typography color="textPrimary">E-Commerce</Typography>
+        <Typography>Products</Typography>
+      </Breadcrumbs>
       <Grid container spacing={2}>
         {products.map((product) => (
           <ProductCard product={product} key={product._id} />

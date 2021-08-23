@@ -6,7 +6,10 @@ import {
   Grid,
   CardMedia,
   CardHeader,
+  CardActionArea,
+  CardActions,
 } from "@material-ui/core";
+import { formatCurrency } from "helpers";
 import { useCartContext } from "../hooks/";
 
 const ProductCard = ({ product }) => {
@@ -15,20 +18,36 @@ const ProductCard = ({ product }) => {
     <>
       <Grid item lg={3}>
         <Card>
-          <CardMedia
-            image={`/${product.image}`}
-            title={product.title}
-            style={{
-              height: 150,
-              backgroundSize: "contain",
-            }}
+          <CardActionArea>
+            <CardMedia
+              image={product.image}
+              title={product.title}
+              style={{
+                height: 150,
+                backgroundSize: "contain",
+              }}
+            />
+          </CardActionArea>
+          <CardHeader
+            title={
+              <Typography>
+                {product.title.length < 25
+                  ? product.title
+                  : product.title.substring(0, 25) + "..."}
+              </Typography>
+            }
+            subheader={formatCurrency(product.price)}
           />
-          <CardHeader title={product.title} />
           <CardContent>
-            <Typography>{product.description}</Typography>
-            <Typography>{product.prince}</Typography>
-
+            <Typography>
+              {product.description.length < 50
+                ? product.description
+                : product.description.substring(0, 50) + "..."}
+            </Typography>
+          </CardContent>
+          <CardActions>
             <Button
+              fullWidth
               onClick={() => {
                 if (isInCart(product._id))
                   return alert("You already added this product");
@@ -39,7 +58,7 @@ const ProductCard = ({ product }) => {
             >
               Add To Cart
             </Button>
-          </CardContent>
+          </CardActions>
         </Card>
       </Grid>
     </>
